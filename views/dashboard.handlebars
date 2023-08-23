@@ -1,0 +1,17 @@
+<h1 class="mt-4">Dashboard</h1>
+<p class="lead mb-3">Welcome {{username}}</p>
+      {{#if success}}
+      <div class="alert alert-success">
+        <strong>Success!</strong>{{success}}
+      </div>
+      {{/if}}
+      <form action="/users/dashboard" method="POST">
+      <div class="form-group">
+        <label for="comment">Comment:</label>
+        <textarea name = 'comment ' class="form-control" rows="5" id="comment"></textarea>
+      </div>
+      <button name='comment' id = 'comment' type="submit" class="btn btn-primary btn-block">
+          Add Comment
+        </button>
+        </form>
+<a href="/users/logout" class="btn btn-secondary">Logout</a>
