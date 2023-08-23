@@ -2,7 +2,8 @@ const express = require('express')
 
 const app = express()
 const {engine} = require("express-handlebars");
-
+const dotenv = require("dotenv")
+dotenv.config()
 
 app.engine('handlebars', engine({
     defaultLayout : 'main'

@@ -10,11 +10,15 @@ const User = require("../models/User")
 
 const {signAccessToken, signRefreshToken} = require("../helpers/jwt")
 
-const {verifyAccessToken} = require("../helpers/jwt")
+const {verifyAccessToken, verifyRefreshToken} = require("../helpers/jwt")
 
-router.get('/',verifyAccessToken, async(req, res) => {
+router.get('/',(req, res) => {
 
-    res.send('welcome user')
+    res.render('welcome')
+})
+
+router.get("/welcomeuser", verifyAccessToken, async(req, res) => {
+    res.render("dashboard")
 })
 
 router.get("/users/login",(req, res)=> {
@@ -50,6 +54,7 @@ router.post("/users/register", async(req, res, next) => {
         const accessToken = await signAccessToken(savedUser.id)
         const refreshToken = await signRefreshToken(savedUser.id)
         res.send({accessToken, refreshToken})
+        
 
     } catch (error) {
         next(error)
@@ -68,7 +73,7 @@ router.post("/users/login", async(req, res, next) => {
     const accessToken = await signAccessToken(user.id)
     const refreshToken = await signRefreshToken(user.id)
     res.send({accessToken, refreshToken}).status(200)
-    //res.redirect("/")
+    
 
 
 
